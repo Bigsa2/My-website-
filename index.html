@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,16 @@
 <title>Instagram — Log In</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+<!-- Supabase SDK Library -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // Supabase Client Initialization
+  const SUPABASE_URL = 'https://uesvssqpytoircmaovth.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable___qa6y1l1dzJpVm3bQNp1w_4TOVbSdT';
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+</script>
+
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:'Poppins',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;
@@ -16,16 +27,67 @@
   .input::placeholder{color:rgba(255,255,255,0.6);}
   .input:focus{outline:none;border-color:#fff;}
   .btn{width:100%;padding:13px;background:linear-gradient(90deg,#fa7e1e,#d62976,#962fbf);color:#fff;border:none;border-radius:10px;font-weight:600;font-size:14px;cursor:pointer;margin-top:8px;}
+  .btn-secondary{background:rgba(255,255,255,0.15);margin-top:10px;}
   .link{display:block;text-align:center;color:#fff;font-size:12.5px;margin-top:18px;text-decoration:none;opacity:0.85;}
 </style>
 </head>
 <body>
   <div class="card">
     <div class="logo">Instagram</div>
-    <input class="input" type="text" placeholder="Phone number, username, or email">
-    <input class="input" type="password" placeholder="Password">
-    <button class="btn">Log in</button>
+    <form id="auth-form">
+      <input class="input" id="email" type="email" placeholder="Email address" required>
+      <input class="input" id="password" type="password" placeholder="Password" required>
+      <button class="btn" type="submit" id="login-btn">Log in</button>
+      <button class="btn btn-secondary" type="button" id="signup-btn">Sign up</button>
+    </form>
     <a class="link" href="#">Forgot password?</a>
   </div>
+
+  <script>
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const authForm = document.getElementById('auth-form');
+    const signupBtn = document.getElementById('signup-btn');
+
+    // Handle Log In
+    authForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = emailInput.value;
+      const password = passwordInput.value;
+
+      const { data, error } = await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password,
+      });
+
+      if (error) {
+        alert("Login failed: " + error.message);
+      } else {
+        alert("Logged in successfully!");
+      }
+    });
+
+    // Handle Sign Up
+    signupBtn.addEventListener('click', async () => {
+      const email = emailInput.value;
+      const password = passwordInput.value;
+
+      if (!email || !password) {
+        alert("Please enter both an email and password.");
+        return;
+      }
+
+      const { data, error } = await supabaseClient.auth.signUp({
+        email: email,
+        password: password,
+      });
+
+      if (error) {
+        alert("Sign up failed: " + error.message);
+      } else {
+        alert("Sign up successful! Please check your email for a confirmation link.");
+      }
+    });
+  </script>
 </body>
 </html>

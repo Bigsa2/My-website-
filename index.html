@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>facebook — Log In</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Poppins',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;
+    background:radial-gradient(circle at 30% 20%,#feda75,#fa7e1e 30%,#d62976 55%,#962fbf 75%,#4f5bd5 100%);}
+  .card{background:rgba(0,0,0,0.55);backdrop-filter:blur(14px);border-radius:20px;padding:44px 30px;width:100%;max-width:360px;border:1px solid rgba(255,255,255,0.15);}
+  .logo{font-weight:700;font-size:30px;color:#fff;text-align:center;margin-bottom:32px;letter-spacing:0.5px;}
+  .input{width:100%;padding:13px 16px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.25);border-radius:10px;color:#fff;font-size:14px;margin-bottom:12px;font-family:'Poppins',sans-serif;}
+  .input::placeholder{color:rgba(255,255,255,0.6);}
+  .input:focus{outline:none;border-color:#fff;}
+  .btn{width:100%;padding:13px;background:linear-gradient(90deg,#fa7e1e,#d62976,#962fbf);color:#fff;border:none;border-radius:10px;font-weight:600;font-size:14px;cursor:pointer;margin-top:8px;}
+  .link{display:block;text-align:center;color:#fff;font-size:12.5px;margin-top:18px;text-decoration:none;opacity:0.85;}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">facebook</div>
+    <input class="input" type="text" placeholder="Phone number, username, or email">
+    <input class="input" type="password" placeholder="Password">
+    <button class="btn">Log in</button>
+    <a class="link" href="#">Forgot password?</a>
+  </div>
+</body>
+</html>
